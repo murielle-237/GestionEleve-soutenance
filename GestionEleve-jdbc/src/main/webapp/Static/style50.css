@@ -1,0 +1,63 @@
+/* 📄 Corps et structure générale */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  background-color: #f0f4f8;
+  color: #333;
+}
+
+/* 📦 App-container en grille pour disposition verticale */
+.app-container {
+  display: grid;
+  grid-template-columns: 230px 1fr;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+  grid-template-areas:
+    "sidebar navbar"
+    "sidebar main-content"
+    "sidebar footer";
+}
+
+/* 🧱 Sidebar */
+.sidebar {
+  grid-area: sidebar;
+  background-color: #8d8de7;
+  color: #ecf0f1;
+  padding: 20px;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+}
+
+.min h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.menu-item {
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  transition: background 0.3s ease;
+  cursor: pointer;
+}
+
+.menu-item i {
+  margin-right: 10px;
+}
+
+.menu-item:hover, .menu-item.active {
+  background-color: #1abc9c;
+  color: #fff;
+}
+
+/* 🔝 Navbar */
+
+
+a{
+  text-decoration: none;
+  color: inherit;
+  
+ }

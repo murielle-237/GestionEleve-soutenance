@@ -1,0 +1,382 @@
+.tableau-bulletins {
+  margin-top: 20px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.tableau-bulletins table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tableau-bulletins th, .tableau-bulletins td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.tableau-bulletins th {
+  background-color: #f5f5f5;
+  font-weight: 600;
+}
+
+.tableau-bulletins a {
+  color: #1e88e5;
+  text-decoration: none;
+}
+
+.tableau-bulletins a:hover {
+  text-decoration: underline;
+}
+
+.forms select, .forms input[type="file"] {
+  display: block;
+  margin-bottom: 10px;
+  padding: 8px;
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.forms button {
+  padding: 10px 15px;
+  background-color: #1e88e5;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.forms button:hover {
+  background-color: #1565c0;
+}
+
+/* 📄 Corps et structure générale */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  background-color: #f0f4f8;
+  color: #333;
+}
+
+/* 📦 App-container en grille pour disposition verticale */
+.app-container {
+  display: grid;
+  grid-template-columns: 230px 1fr;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+  grid-template-areas:
+    "sidebar navbar"
+    "sidebar main-content"
+    "sidebar footer";
+}
+
+/* 🧱 Sidebar verticale sur toute la hauteur */
+.sidebar {
+  grid-area: sidebar;
+  background-color: #8d8de7;
+  color: #ecf0f1;
+  padding: 20px;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+}
+
+.sidebar-header h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.menu-item {
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  transition: background 0.3s ease;
+}
+
+.menu-item i {
+  margin-right: 10px;
+}
+
+.menu-item:hover {
+  background-color: #34495e;
+}
+
+.menu-item.active {
+  background-color: #1abc9c;
+}
+
+/* 🔝 Navbar subtile en haut de page */
+.navbar {
+  grid-area: navbar;
+  background-color: #f9fafb; /* Gris clair, moins agressif que blanc pur */
+  padding: 10px 24px;
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.menu-toggle {
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: #333;
+  cursor: pointer;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: #eef1f5;
+  padding: 6px 10px;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
+
+.search-bar input {
+  border: none;
+  background: none;
+  margin-left: 8px;
+  padding: 4px;
+  font-size: 14px;
+  width: 200px;
+  outline: none;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.notifications {
+  position: relative;
+}
+
+.notification-badge {
+  position: absolute;
+  top: -4px;
+  right: -6px;
+  background-color: #007bff;
+  color: white;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 10px;
+}
+
+.user-avatar {
+  background-color: #007bff;
+  color: white;
+  border-radius: 50%;
+  padding: 6px 10px;
+  font-weight: bold;
+}
+
+
+/* 🔍 Barre de recherche */
+.search-bar {
+  display: flex;
+  align-items: center;
+}
+
+.search-bar input {
+  padding: 6px 10px;
+  border: none;
+  border-radius: 4px;
+  margin-left: 6px;
+  background-color: #f1f3f5;
+}
+
+/* 👤 Infos utilisateur */
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-avatar {
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 50%;
+  padding: 6px 12px;
+  font-weight: bold;
+}
+
+/* 📝 Formulaire */
+.main-content {
+  grid-area: main-content;
+  padding: 30px;
+}
+
+.forms {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  max-width: 800px;
+  margin: auto;
+}
+
+form h2 {
+  text-align: center;
+  font-size: 28px;
+  color: #007bff;
+  margin-bottom: 25px;
+}
+
+/* Champs du formulaire */
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="date"] {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 16px;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+  transition: all 0.3s ease;
+}
+
+input:focus {
+  border-color: #007bff;
+  background-color: #e9f5ff;
+  outline: none;
+}
+
+/* Bouton submit */
+button[type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* 📊 Tableau des stagiaires */
+.tableau {
+  margin-top: 40px;
+}
+
+.tableau .hh h1 {
+  font-size: 24px;
+  margin-bottom: 5px;
+  color: #343a40;
+}
+
+.tableau .hh p {
+  text-align: right;
+  color: #007bff;
+  font-weight: 500;
+  margin-top: -20px;
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+
+th, td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid black;
+}
+
+th {
+  background-color: #007bff;
+  color: #181616;
+}
+
+tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+tr:hover {
+  background-color: #e9f5ff;
+}
+
+/* Boutons d'action */
+button.icon {
+  background: none;
+  border: none;
+  font-size: 16px;
+  color: #555;
+  cursor: pointer;
+  margin: 0 6px;
+  transition: color 0.2s ease;
+}
+
+button.icon:hover {
+  color: #007bff;
+}
+
+/* 🖤 Footer noir */
+.bottom-bar {
+  grid-area: footer;
+  background-color: #000;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.bottom-bar a {
+  color: #f1f1f1;
+  text-decoration: none;
+  margin: 0 10px;
+  transition: color 0.3s;
+}
+
+.bottom-bar a:hover {
+  color: #1abc9c;
+}
+
+/* Style pour le QR code dans le tableau */
+.qrcode {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+.qrcode canvas, .qrcode img {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+a{
+  text-decoration: none;
+  color: inherit;
+  
+ }

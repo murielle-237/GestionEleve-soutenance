@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${pageTitle}">page d'accueil</title>
+    <link rel="stylesheet" th:href="@{/static/css.css}">
+</head>
+<body>
+    <div class="main-container">
+        <!-- Côté gauche : bienvenue -->
+        <div class="welcome-section">
+            <h1 th:text="${welcomeTitle}">Bienvenue sur SMARTSCHOOL !</h1>
+            <p th:text="${welcomeMessage}"></p>
+                Penser pour vous faciliter la tache et vous guider ,cette application offre une navigation fluide,des données fiable et une interface claire vous permettent einsi de suivre et gerer vous activité en tout simplicite et en toute securité egalement. .
+            </p>
+        </div>
+
+        <!-- Côté droit : formulaire -->
+        <div class="form-section">
+            <div class="container">
+                <div class="wrapper">
+                    <section class="login">
+                        <h1>Connexion</h1>
+                        <form th:action="@{/login}" method="post">
+                            <div class="inputbox">
+                                <input type="text" name="nomPrenom" required>
+                                <label>Nom et prénom</label>
+                            </div>
+                            <div class="inputbox">
+                                <input type="date" name="dateNaissance">
+                                <label>Date de naissance</label>
+                            </div>
+                            <div class="inputbox">
+                                <input type="tel" name="telephone" required>
+                                <label>Numéro de téléphone</label>
+                            </div>
+                            <div class="inputbox">
+                             <select name="sexe" required>
+                               <option value="">-- Sélectionner un rôle --</option>
+                               <option value="secretaire">Secrétaire</option>
+                               <option value="enseignant">Enseignant</option>
+                               <option value="eleve">Élève</option>
+                               <option value="parent">Parent</option>
+                             </select>
+                             <label>Rôle</label> 
+                            </div>
+
+                            <div class="inputbox">
+                                <input type="email" name="email" required>
+                                <label>Email</label>
+                            </div>
+                            <div class="inputbox">
+                                <input type="password" name="motDePasse" required>
+                                <label>Mot de passe</label>
+                            </div>
+                            <div class="forgot">
+                                <input type="checkbox" name="rememberMe">
+                                <a href="#" th:href="@{/forgot-password}">Mot de passe oublié ?</a>
+                            </div>
+                            <button type="submit">Connexion</button>
+                            <div class="register-option">
+                                <span>Pas de compte ?</span>
+                                <a th:href="@{/accueil}" id="switch-to-register">Inscrivez-vous</a>
+                            </div>
+                        </form>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,146 @@
+/* Reset de base */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background-color: #f4f6f8;
+    color: #333;
+}
+
+/* Conteneur général */
+.app-container {
+    display: grid;
+    grid-template-columns: 230px 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+        "sidebar navbar"
+        "sidebar main";
+    height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    grid-area: sidebar;
+    background-color: #4a69bd;
+    color: #fff;
+    padding: 20px;
+}
+.sidebar h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 24px;
+    letter-spacing: 1px;
+}
+.sidebar-menu .menu-item {
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: background 0.3s;
+}
+.sidebar-menu .menu-item i {
+    margin-right: 10px;
+}
+.sidebar-menu .menu-item:hover {
+    background-color: #3b4e99;
+}
+.sidebar-menu .active {
+    background-color: #1abc9c;
+}
+
+/* Navbar */
+.navbar {
+    grid-area: navbar;
+    background-color: #fff;
+    padding: 15px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.navbar h1 {
+    font-size: 22px;
+    color: #4a69bd;
+}
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.user-avatar {
+    background-color: #1abc9c;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 50%;
+    font-weight: bold;
+}
+
+/* Contenu principal */
+.main-content {
+    grid-area: main;
+    padding: 30px;
+}
+
+/* Tableau des matières */
+.tableau {
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead tr {
+    background-color: #4a69bd;
+    color: #fff;
+    text-align: left;
+}
+
+th, td {
+    padding: 15px 12px;
+    border-bottom: 1px solid #e1e4ea;
+}
+
+tbody tr:hover {
+    background-color: #f1f3f6;
+    transition: background 0.3s;
+}
+
+/* Styles appréciation */
+.tresbien {
+    background-color: #2ecc71;
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 6px;
+}
+
+.bien {
+    background-color: #27ae60;
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 6px;
+}
+
+.assezbien {
+    background-color: #f1c40f;
+    color: #fff;
+    text-align: center;
+}
+a{
+  text-decoration: none;
+  color: inherit;
+  
+ }

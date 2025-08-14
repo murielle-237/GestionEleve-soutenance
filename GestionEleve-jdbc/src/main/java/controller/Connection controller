@@ -1,0 +1,76 @@
+package controller;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.WebContext;
+import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
+
+@WebServlet(name = "AccueilServlet", urlPatterns = {"/Accueil"})
+
+public class AccueilServlet extends HttpServlet {
+
+    private TemplateEngine templateEngine;
+
+    @Override
+    public void init() throws ServletException {
+        ServletContextTemplateResolver resolver = new ServletContextTemplateResolver(getServletContext());
+        resolver.setPrefix("/WEB-INF/templates/");
+        resolver.setSuffix(".html");
+        resolver.setTemplateMode("HTML");
+        resolver.setCharacterEncoding("UTF-8");
+
+        templateEngine = new TemplateEngine();
+        templateEngine.setTemplateResolver(resolver);
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        WebContext context = new WebContext(req, resp, getServletContext(), req.getLocale());
+        context.setVariable("pageTitle", "Page d'accueil");
+        context.setVariable("welcomeTitle", "Bienvenue sur SMARTSCHOOL !");
+        context.setVariable("welcomeMessage", "Pensée pour vous faciliter la tâche et vous guider, cette application offre une navigation fluide, des données fiables et une interface claire vous permettant de suivre et gérer vos activités en toute simplicité et sécurité.");
+
+        resp.setContentType("text/html;charset=UTF-8");
+        templateEngine.process("accueil", context, resp.getWriter());
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String nomPrenom = req.getParameter("nomPrenom");
+        String role = req.getParameter("sexe"); // rôle sélectionné
+        role = role != null ? role.toLowerCase().trim() : "";
+
+        WebContext context = new WebContext(req, resp, getServletContext(), req.getLocale());
+        context.setVariable("pageTitle", "Tableau de bord");
+        context.setVariable("welcomeTitle", "Bonjour " + nomPrenom);
+
+        switch (role) {
+            case "secretaire":
+                context.setVariable("welcomeMessage", "Connexion réussie en tant que secrétaire !");
+                templateEngine.process("dashboard", context, resp.getWriter());
+                break;
+            case "enseignant":
+                context.setVariable("welcomeMessage", "Connexion réussie en tant qu'enseignant !");
+                templateEngine.process("dashboard", context, resp.getWriter());
+                break;
+            case "eleve":
+                context.setVariable("welcomeMessage", "Connexion réussie en tant qu'élève !");
+                templateEngine.process("dashboard", context, resp.getWriter());
+                break;
+            case "parent":
+                context.setVariable("welcomeMessage", "Connexion réussie en tant que parent !");
+                templateEngine.process("dashboard", context, resp.getWriter());
+                break;
+            default:
+                context.setVariable("pageTitle", "Connexion");
+                context.setVariable("welcomeTitle", "Accès limité");
+                context.setVariable("welcomeMessage", "Rôle inconnu. Accès refusé.");
+                templateEngine.process("accueil", context, resp.getWriter());
+        }
+    }
+}

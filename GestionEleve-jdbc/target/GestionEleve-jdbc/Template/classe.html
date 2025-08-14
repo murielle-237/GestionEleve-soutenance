@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Élèves</title>
+    <link rel="stylesheet" href="style2.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="app-container">
+    <!-- Sidebar -->
+ <aside class="sidebar">
+        <h2>smartschool</h2>
+        <div class="sidebar-menu">
+           <a href="dashboard.html"> <div class="menu-item"><i class="fas fa-tachometer-alt"></i> Dashboard</div></a>
+            <a href="emploidetemps.html"></a><div class="menu-item "><i class="fas fa-user-check"></i> Emploi du temps</div></a>
+           <a href="note.html"> <div class="menu-item "><i class="fas fa-book"></i> Notes</div></a>
+            <a href="devoir.html"><div class="menu-item "><i class="fas fa-users"></i> Devoirs</div></a>
+            <a href="classe.html"><div class="menu-item active"><i class="fas fa-chart-bar"></i> Salle</div></a>
+            <a href="bulettin.html"><div class="menu-item"><i class="fas fa-cog"></i> Mon bulletin</div></a>
+        </div>
+    </aside>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="navbar-left">
+            <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+            <h1>Liste des Élèves</h1>
+        </div>
+        <div class="user-info">
+            <div class="notifications">
+                <i class="fas fa-bell"></i>
+                <span class="notification-badge">3</span>
+            </div>
+            <div class="user-avatar">AB</div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="emploi-container">
+            <table class="eleves">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nom</th>
+                        <th>Matricule</th>
+                        <th>Classe</th>
+                        <th>Date de naissance</th>
+                    </tr>
+                </thead>
+                <tbody id="eleves-body">
+                    <!-- Les élèves seront ajoutés par JS -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bottom-bar">
+        <span>&copy; 2025 Mon Dashboard</span>
+        <div>
+            <a href="#">Accueil</a>
+            <a href="#">Contact</a>
+            <a href="#">À propos</a>
+        </div>
+    </footer>
+</div>
+
+<script>
+    const tbody = document.getElementById('eleves-body');
+
+    const classes = ['6A', '6B', '5A', '5B', '4A', '4B', '3A', '3B'];
+    for(let i = 1; i <= 50; i++){
+        const nom = `Élève ${i}`;
+        const matricule = `MAT${1000 + i}`;
+        const classe = classes[Math.floor(Math.random() * classes.length)];
+        const dateNaissance = `20${Math.floor(Math.random()*3 + 0)}0-${String(Math.floor(Math.random()*12 +1)).padStart(2,'0')}-${String(Math.floor(Math.random()*28 +1)).padStart(2,'0')}`;
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${i}</td>
+                        <td>${nom}</td>
+                        <td>${matricule}</td>
+                        <td>${classe}</td>
+                        <td>${dateNaissance}</td>`;
+        tbody.appendChild(tr);
+    }
+</script>
+</body>
+</html>

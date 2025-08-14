@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestion Stagiaire</title>
+  <link rel="stylesheet" href="style1.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+<div class="app-container">
+ <aside class="sidebar">
+        <h2>smartschool</h2>
+        <div class="sidebar-menu">
+           <a href="dashboard.html"> <div class="menu-item"><i class="fas fa-tachometer-alt"></i> Dashboard</div></a>
+            <a href="emploidetemps.html"></a><div class="menu-item"><i class="fas fa-user-check"></i> Emploi du temps</div></a>
+           <a href="note.html"> <div class="menu-item "><i class="fas fa-book"></i> Notes</div></a>
+            <a href="devoir.html"><div class="menu-item "><i class="fas fa-users"></i> Devoirs</div></a>
+            <a href="classe.html"><div class="menu-item"><i class="fas fa-chart-bar"></i> Salle</div></a>
+            <a href="bulettin.html"><div class="menu-item active"><i class="fas fa-cog"></i> Mon bulletin</div></a>
+        </div>
+    </aside>
+
+  <!-- Top Navbar -->
+  <header class="navbar">
+    <div class="navbar-left">
+      <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+      <div class="search-bar">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Rechercher...">
+      </div>
+    </div>
+    <div class="user-info">
+      <div class="notifications">
+        <i class="fas fa-bell"></i>
+        <span class="notification-badge">3</span>
+      </div>
+      <div class="user-avatar">AD</div>
+      <span>Admin</span>
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <main class="main-content">
+    <!-- Section Bulletin des élèves -->
+    <div class="tableau">
+      <div class="hh">
+        <h1>Gestion des Bulletins</h1>
+      </div>
+
+      
+
+      <!-- Tableau des bulletins -->
+      <div class="tableau-bulletins">
+        <table>
+          <tr>
+            <th>Élève</th>
+            <th>Classe</th>
+            <th>Bulletin</th>
+            <th>QR Code</th>
+            <th>Action</th>
+          </tr>
+          <tr>
+            <td>murielle zebaze</td>
+            <td>1ereD</td>
+            <td>....</td>
+            <td>...</td>
+            <td>...</td>
+          </tr>
+          <tr th:each="bulletin : ${bulletins}">
+            <td th:text="${bulletin.eleve.nom} + ' ' + ${bulletin.eleve.prenom}"></td>
+            <td th:text="${bulletin.eleve.classe}"></td>
+            <td>
+              <a th:href="@{/bulletin/download/{id}(id=${bulletin.id})}" target="_blank">Télécharger PDF</a>
+            </td>
+            <td>
+  <div class="qrcode" data-bulletin-id="${bulletin.id}"></div>
+</td>
+
+            <td>
+              <button class="icon" th:onclick="'window.location.href=\'/bulletin/delete/' + ${bulletin.id} + '\'"'>
+                <i class="fas fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </main>
+  <!-- Remplace la partie <td> du QR Code par ça -->
+<td>
+  <div class="qrcode" data-bulletin-id="${bulletin.id}"></div>
+</td>
+
+<!-- En bas du body, avant </body>, ajoute ce script : -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.qrcode').forEach(div => {
+      const bulletinId = div.getAttribute('data-bulletin-id');
+      // Le contenu du QR Code peut être le lien vers le PDF du bulletin
+      const qrContent = `/bulletin/download/${bulletinId}`;
+      new QRCode(div, {
+        text: qrContent,
+        width: 60,
+        height: 60
+      });
+    });
+  });
+</script>
+
+
+  <!-- Footer -->
+  <footer class="bottom-bar">
+    <div class="copyright">&copy; 2023 IT Manager - Tous droits réservés</div>
+    <div class="bottom-links">
+      <a href="#">Confidentialité</a>
+      <a href="#">Conditions</a>
+      <a href="#">Support</a>
+    </div>
+  </footer>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

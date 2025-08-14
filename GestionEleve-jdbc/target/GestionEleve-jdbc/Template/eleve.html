@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestionstagiaire</title>
+
+  <link rel="stylesheet" th:href="@{/style2.css}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+<div class="app-container">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+        <div class="min">
+            <h2>🎓 Smartschool</h2>
+        </div>
+        <nav class="sidebar-menu">
+           <div class="menu-item ">
+               <a href="Secretaie.html"> <i class="fas fa-tachometer-alt"></i>
+                <span>Dashboard</span>
+            </div></a>
+            <a href="eleve.html"><div class="menu-item active ">
+                <i class="fas fa-user-graduate"></i>
+                <span>Élève</span>
+            </div></a>
+            <a href="enseignant.html"><div class="menu-item">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <span>Enseignant</span>
+            </div></a>
+            <a href="payement.html"><div class="menu-item">
+                <i class="fas fa-credit-card"></i>
+                <span>Payement</span></a>
+            </div>
+            
+            
+             <a href="listed'eleve.html"><div class="menu-item">
+                <i class="fas fa-list-ol"></i>
+                <span>Liste d'élèves en classe d'examen</span>
+            </div></a>
+           <a href="blullettin.html"> <div class="menu-item">
+                <i class="fas fa-file-signature"></i>
+                <span>Bulletin des élèves</span>
+            </div></a>
+        </nav>
+    </aside>
+
+  <!-- Top Navbar -->
+  <header class="navbar">
+    <div class="navbar-left">
+      <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+      <div class="search-bar"><i class="fas fa-search"></i><input type="text" placeholder="Rechercher..."></div>
+    </div>
+    <div class="user-info">
+      <div class="notifications"><i class="fas fa-bell"></i><span class="notification-badge">3</span></div>
+      <div class="user-avatar">AD</div><span>Admin</span>
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <main class="main-content">
+    <div class="forms">
+      <div class="ent"><h2>Inscription de l'élève</h2></div>
+      <div class="h1">
+        <form th:action="@{/eleve}" method="post" class="p1">
+          <input type="text" name="nom" placeholder="Nom" required><br>
+          <input type="text" name="prenom" placeholder="Prénom" required><br>
+          <input type="email" name="email" placeholder="Email" required><br>
+          <input type="text" name="adresse" placeholder="Adresse" required><br>
+          <input type="number" name="telephone" placeholder="Téléphone" required><br>
+          <input type="date" name="dateNaissance" required><br>
+          <input type="text" name="classe" placeholder="Classe" required><br>
+          <input type="text" name="matricule" placeholder="Matricule" required><br>
+          <button type="submit">Enregistrer</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Liste des élèves -->
+    <div class="tableau">
+      <div class="ff">
+        <div class="hh">
+          <h1>Inventaire des élèves</h1>
+        </div>
+        <table>
+          <tr>
+            <th>Matricule</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Classe</th>
+            <th>Date de naissance</th>
+            <th>Téléphone</th>
+            <th>Email</th>
+            <th>Adresse</th>
+            <th>Action</th>
+          </tr>
+          <tr th:each="eleve : ${eleves}">
+            <td th:text="${eleve.matricule}"></td>
+            <td th:text="${eleve.nom}"></td>
+            <td th:text="${eleve.prenom}"></td>
+            <td th:text="${eleve.classe}"></td>
+            <td th:text="${#dates.format(eleve.dateNaissance, 'yyyy-MM-dd')}"></td>
+            <td th:text="${eleve.telephone}"></td>
+            <td th:text="${eleve.email}"></td>
+            <td th:text="${eleve.adresse}"></td>
+            <td>
+              <form th:action="@{/eleve/delete/{id}(id=${eleve.id})}" method="post" style="display:inline;">
+                <button class="icon" type="submit"><i class="fas fa-trash"></i></button>
+              </form>
+              <a th:href="@{/eleve/edit/{id}(id=${eleve.id})}">
+                <button class="icon" type="button"><i class="fas fa-edit"></i></button>
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bottom-bar">
+    <div class="copyright">&copy; 2023 IT Manager - Tous droits réservés</div>
+    <div class="bottom-links">
+      <a href="#">Confidentialité</a>
+      <a href="#">Conditions</a>
+      <a href="#">Support</a>
+    </div>
+  </footer>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

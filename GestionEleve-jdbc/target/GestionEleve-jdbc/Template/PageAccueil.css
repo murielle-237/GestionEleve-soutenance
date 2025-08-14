@@ -1,0 +1,79 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f0f4f8;
+  animation: fadeIn 1s ease-in;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+  border-radius: 50px;
+}
+
+.welcome, .profile-selection {
+  flex: 1;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.welcome {
+  background-color:#6f71da;
+  color: white;
+  justify-content: center ;
+  flex: 1;
+}
+
+.profile-selection {
+  
+  text-align: center;
+  justify-content: center ;
+  background-image: url(2.jpg);
+  background-size: cover;
+  padding: 3rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.profile-selection h2 {
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+  color: #161718;
+}
+
+.roles {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.role-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-color:#7b79e7f5;
+  color:  white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.role-circle:hover {
+  transform: scale(1.1);
+  background-color: #4009c2;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0;}
+  to { opacity: 1;}
+}
