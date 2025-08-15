@@ -1,6 +1,6 @@
 
 
-import java.sql.Date;
+
 import java.sql.SQLException;
 
 import java.util.List;
@@ -34,55 +34,51 @@ public class MainEleve {
             try {
                 switch (choix) {
                     case 1:
-                        
-                        int id = Integer.parseInt(scanner.nextLine());
+                        System.out.print("Id_eleve : ");
+                        int id_eleve = Integer.parseInt(scanner.nextLine());
                         System.out.print("Nom : ");
                         String nom = scanner.nextLine();
                         System.out.print("Prenom : ");
                         String prenom = scanner.nextLine();
-                        System.out.print("Adresse : ");
-                        String adresse = scanner.nextLine();
+                        System.out.print("Date_de_naissance (yyyy-mm-dd) : ");
+                        String date_naissance = scanner.nextLine();
                         System.out.print("Email : ");
                         String email = scanner.nextLine();
-                        System.out.print("Date_de_naissance (yyyy-mm-dd) : ");
-                        String NewDate_naissance = scanner.nextLine();
-                        java.sql.Date date_naissance = java.sql.Date.valueOf(NewDate_naissance);
-
                         System.out.print("Téléphone : ");
                         String telephone = scanner.nextLine();
-                        System.out.print("Mot_de_passe : ");
-                        String mot_de_passe = scanner.nextLine();
-                        
+                        System.out.print("Adresse : ");
+                        String adresse = scanner.nextLine();
+                        System.out.print("Matricule : ");
+                        String matricule = scanner.nextLine();
+                        System.out.print("Id_classe : ");
+                        int id_classe = Integer.parseInt(scanner.nextLine());
 
-                        Eleve eleve = new Eleve(id, nom, prenom, date_naissance, email, telephone, adresse);
-                        eleve.setMot_de_passe(mot_de_passe);
-
+                        Eleve eleve = new Eleve(id_eleve, nom, prenom, date_naissance, email, telephone, adresse, matricule, id_classe);
                         repo.create(eleve);
                         System.out.println("Élève ajouté avec succès !");
                         break;
 
                     case 2:
-                       
-                        System.out.print("Nouveau Nom : ");
+                        System.out.print("Id_eleve à modifier : ");
+                        int idModif = Integer.parseInt(scanner.nextLine());
+                        System.out.print("Nom : ");
                         String newNom = scanner.nextLine();
-                        System.out.print("Nouveau Prénom : ");
+                        System.out.print("Prenom : ");
                         String newPrenom = scanner.nextLine();
-                        System.out.print("Nouvelle Adresse : ");
-                        String newAdresse = scanner.nextLine();
-                        System.out.print("Nouvel Email : ");
+                        System.out.print("Date_de_naissance (yyyy-mm-dd) : ");
+                        String newDate_naissance = scanner.nextLine();
+                        System.out.print("Email : ");
                         String newEmail = scanner.nextLine();
-                        System.out.print("Nouvelle Date de naissance (yyyy-mm-dd) : ");
-                        String   newDatenaissance = scanner.nextLine();
-                        java.sql.Date newDate_naissance = java.sql.Date.valueOf(newDatenaissance);
-
+                        System.out.print("Téléphone : ");
                         String newTelephone = scanner.nextLine();
-                        System.out.print("Nouveau Mot de passe : ");
-                        String newMot_de_passe = scanner.nextLine();
-                       
+                        System.out.print("Adresse : ");
+                        String newAdresse = scanner.nextLine();
+                        System.out.print("Matricule : ");
+                        String newMatricule = scanner.nextLine();
+                        System.out.print("Id_classe : ");
+                        int newId_classe = Integer.parseInt(scanner.nextLine());
 
-                        Eleve eleveModif = new Eleve( newNom, newPrenom, newDate_naissance, newEmail, newTelephone, newAdresse;=
-                        eleveModif.setMot_de_passe(newMot_de_passe);
-
+                        Eleve eleveModif = new Eleve(idModif, newNom, newPrenom, newDate_naissance, newEmail, newTelephone, newAdresse, newMatricule, newId_classe);
                         repo.updateEleve(eleveModif);
                         System.out.println("Élève modifié avec succès !");
                         break;
@@ -97,10 +93,10 @@ public class MainEleve {
                     case 4:
                         List<Eleve> eleves = repo.findAll();
                         for (Eleve e : eleves) {
-                            System.out.println(e.getId_eleve() + " - " + e.getNom() + " " + e.getPrenom() 
-                                + " - " + e.getEmail() + " - " + e.getDate_naissance() 
-                                + " - " + e.getAdresse() + " - " + e.getTelephone() 
-                                + " - Id_classe: " + e.getId_classe());
+                            System.out.println(e.getId_eleve() + " - " + e.getNom() + " " + e.getPrenom()
+                                + " - " + e.getDate_naissance() + " - " + e.getEmail()
+                                + " - " + e.getTelephone() + " - " + e.getAdresse()
+                                + " - " + e.getMatricule() + " - Id_classe: " + e.getId_classe());
                         }
                         break;
 

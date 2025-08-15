@@ -15,7 +15,7 @@ public class EleveRepository {
 
     // ➤ Créer / insérer un élève
     public void create(Eleve eleve) throws SQLException {
-        String sql = "INSERT INTO Eleve (id_eleve, nom, prenom, date_naissance, email, telephone, adresse, id_classe, mot_de_passe) " +
+        String sql = "INSERT INTO Eleve (id_eleve, nom, prenom, date_naissance, email, telephone, adresse, matricule, id_classe) " +
                      "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DataBase.connectDB();
@@ -28,8 +28,9 @@ public class EleveRepository {
             stmt.setString(5, eleve.getEmail());
             stmt.setString(6, eleve.getTelephone());
             stmt.setString(7, eleve.getAdresse());
+            stmt.setString(9, eleve.getMatricule());
             stmt.setInt(8, eleve.getId_classe());
-            stmt.setString(9, eleve.getMot_de_passe());
+            
 
             stmt.executeUpdate();
             System.out.println("✅ Élève ajouté avec succès !");
@@ -53,12 +54,11 @@ public class EleveRepository {
                 String email = rs.getString("email");
                 String telephone = rs.getString("telephone");
                 String adresse = rs.getString("adresse");
+                String matricule = rs.getString("matricule");
                 int id_classe = rs.getInt("id_classe");
-                String mot_de_passe = rs.getString("mot_de_passe");
+                
 
-                Eleve eleve = new Eleve(id_eleve, nom, prenom, date_naissance, email, telephone, adresse, id_classe);
-                eleve.setMot_de_passe(mot_de_passe);
-
+                Eleve eleve = new Eleve(id_eleve, nom, prenom, date_naissance,  email, telephone, adresse, matricule, id_classe);
                 eleveList.add(eleve);
             }
         }
@@ -93,7 +93,7 @@ public class EleveRepository {
             stmt.setString(5, eleve.getTelephone());
             stmt.setString(6, eleve.getAdresse());
             stmt.setInt(7, eleve.getId_classe());
-            stmt.setString(8, eleve.getMot_de_passe());
+            stmt.setString(8, eleve.getMatricule());
             stmt.setInt(9, eleve.getId_eleve());
 
             stmt.executeUpdate();

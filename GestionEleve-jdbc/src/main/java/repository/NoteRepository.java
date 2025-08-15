@@ -13,81 +13,92 @@ public class NoteRepository {
 
     // ➤ Insérer une note
     public void insertNote(Note note) throws SQLException {
-        String sql = "INSERT INTO note (id_evaluation, id_matiere, id_eleve, note_obtenue, appreciation) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO note (id_evaluation, id_matiere, id_eleve, note_obtenue, appreciation, note_examen, note_moyenne) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-        try (Connection conn = DataBase.connectDB();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection connection = DataBase.connectDB();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
-            stmt.setInt(1, note.getId_evaluation());
-            stmt.setInt(2, note.getId_matiere());
-            stmt.setInt(3, note.getId_eleve());
-            stmt.setDouble(4, note.getNote_obtenue());
-            stmt.setString(5, note.getAppreciation());
+            preparedStatement.setInt(1, note.getId_evaluation());
+            preparedStatement.setInt(2, note.getId_matiere());
+            preparedStatement.setInt(3, note.getId_eleve());
+            preparedStatement.setDouble(4, note.getNote_obtenue());
+            preparedStatement.setString(5, note.getAppreciation());
+            preparedStatement.setDouble(6, note.getNote_examen());
+            preparedStatement.setDouble(7, note.getNote_moyenne());
 
-            stmt.executeUpdate();
+            preparedStatement.executeUpdate();
             System.out.println("Insertion de la note réussie !");
         }
     }
 
-    // ➤ Récupérer la liste de toutes les notes
+    // ➤ Récupérer toutes les notes
     public List<Note> getAllNotes() throws SQLException {
         String sql = "SELECT * FROM note";
-        List<Note> noteList = new ArrayList<>();
+        List<Note> listeNotes = new ArrayList<>();
 
-        try (Connection conn = DataBase.connectDB();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
+        try (Connection connection = DataBase.connectDB();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
 
-            while (rs.next()) {
-                int idNote = rs.getInt("id_note");
-                int idEvaluation = rs.getInt("id_evaluation");
-                int idMatiere = rs.getInt("id_matiere");
-                int idEleve = rs.getInt("id_eleve");
-                double noteObtenue = rs.getDouble("note_obtenue");
-                String appreciation = rs.getString("appreciation");
+            while (resultSet.next()) {
+                int id_note = resultSet.getInt("id_note");
+                int id_evaluation = resultSet.getInt("id_evaluation");
+                int id_matiere = resultSet.getInt("id_matiere");
+                int id_eleve = resultSet.getInt("id_eleve");
+                double note_obtenue = resultSet.getDouble("note_obtenue");
+                String appreciation = resultSet.getString("appreciation");
+                double note_examen = resultSet.getDouble("note_examen");
+                double note_moyenne = resultSet.getDouble("note_moyenne");
 
-                Note note = new Note(idNote, idEvaluation, idMatiere, idEleve, noteObtenue, appreciation);
-                noteList.add(note);
+                Note note = new Note(
+                        id_note,
+                        id_evaluation,
+                        id_matiere,
+                        id_eleve,
+                        note_obtenue,
+                        appreciation,
+                        note_examen,
+                        note_moyenne
+                );
+
+                listeNotes.add(note);
             }
         }
 
-        return noteList;
+        return listeNotes;
     }
 
-    // ➤ Supprimer une note par id
-    public void deleteNote(int id) throws SQLException {
+    // ➤ Supprimer une note par son identifiant
+    public void deleteNote(int id_note) throws SQLException {
         String sql = "DELETE FROM note WHERE id_note = ?";
 
-        try (Connection conn = DataBase.connectDB();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection connection = DataBase.connectDB();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
-            stmt.setInt(1, id);
-            stmt.executeUpdate();
+            preparedStatement.setInt(1, id_note);
+            preparedStatement.executeUpdate();
             System.out.println("Suppression de la note réussie !");
         }
     }
 
     // ➤ Mettre à jour une note
     public void updateNote(Note note) throws SQLException {
-        String sql = "UPDATE note SET id_evaluation = ?, id_matiere = ?, id_eleve = ?, note_obtenue = ?, appreciation = ? WHERE id_note = ?";
+        String sql = "UPDATE note SET id_evaluation = ?, id_matiere = ?, id_eleve = ?, note_obtenue = ?, appreciation = ?, note_examen = ?, note_moyenne = ? WHERE id_note = ?";
 
-        try (Connection conn = DataBase.connectDB();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection connection = DataBase.connectDB();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
-           stmt.setInt(1, note.getId_evaluation());
-            stmt.setInt(2, note.getId_matiere());
-            stmt.setInt(3, note.getId_eleve());
-            stmt.setDouble(4, note.getNote_obtenue());
-            stmt.setString(5, note.getAppreciation());
+            preparedStatement.setInt(1, note.getId_evaluation());
+            preparedStatement.setInt(2, note.getId_matiere());
+            preparedStatement.setInt(3, note.getId_eleve());
+            preparedStatement.setDouble(4, note.getNote_obtenue());
+            preparedStatement.setString(5, note.getAppreciation());
+            preparedStatement.setDouble(6, note.getNote_examen());
+            preparedStatement.setDouble(7, note.getNote_moyenne());
+            preparedStatement.setInt(8, note.getId_note());
 
-
-            stmt.executeUpdate();
+            preparedStatement.executeUpdate();
             System.out.println("Mise à jour de la note réussie !");
         }
-    }
-
-    public void create(Note note) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'create'");
     }
 }
